@@ -56,7 +56,9 @@ module.exports = {
           new MessageButton()
             .setStyle("LINK")
             .setLabel("Invite")
-            .setURL("https://roleful.tk/invite")
+            .setURL(
+              "https://discord.com/oauth2/authorize?client_id=961077348550180870&scope=bot&permissions=18456"
+            )
             .setEmoji("➕")
         ),
       ],
