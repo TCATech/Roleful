@@ -4,14 +4,14 @@ const keepAlive = require("../server");
 client.on("ready", () => {
   setInterval(() => {
     const list = [
-      "r!help",
-      `${client.users.cache.size} users`,
-      `${client.guilds.cache.size} servers`,
-      `${client.channels.cache.size} channels`,
+      "r!help | Roleful.tk",
+      `${client.users.cache.size} users | Roleful.tk`,
+      `${client.guilds.cache.size} servers | Roleful.tk`,
+      `${client.channels.cache.size} channels | Roleful.tk`,
     ];
     const randomStatus = list[Math.floor(Math.random() * list.length)];
     let statusType = "WATCHING";
-    if (randomStatus === "r!help") {
+    if (randomStatus === "r!help | Roleful.tk") {
       statusType = "LISTENING";
     }
 
