@@ -24,6 +24,30 @@ module.exports = async (client) => {
     }
   });
 
+  // Slash commands
+  const slashCommands = await globPromise(
+    `${process.cwd()}/slashCommands/*/*.js`
+  );
+
+  const arrayOfSlashCommands = [];
+  slashCommands.map((value) => {
+    const file = require(value);
+    if (!file?.name) return;
+    client.slashCommands.set(file.name, file);
+
+    if (["MESSAGE", "USER"].includes(file.type)) delete file.description;
+    arrayOfSlashCommands.push(file);
+  });
+  client.on("ready", async () => {
+    // Register for a single guild
+    await client.guilds.cache
+      .get(client.config.guild)
+      .commands.set(arrayOfSlashCommands);
+
+    // Register for all the guilds the bot is in
+    // await client.application.commands.set(arrayOfSlashCommands);
+  });
+
   // Events
   const eventFiles = await globPromise(`${process.cwd()}/events/*.js`);
   eventFiles.map((value) => require(value));

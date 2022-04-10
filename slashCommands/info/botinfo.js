@@ -1,25 +1,15 @@
-const {
-  Client,
-  Message,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
-} = require("discord.js");
+const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { Command } = require("reconlx");
 
-module.exports = {
+module.exports = new Command({
   name: "botinfo",
   description: "Tells you some info about Roleful.",
-  /**
-   *
-   * @param {Client} client
-   * @param {Message} message
-   */
-  run: async (client, message) => {
+  run: async ({ client, interaction }) => {
     const embed = new MessageEmbed()
-      .setAuthor(
-        client.user.tag,
-        client.user.displayAvatarURL({ dynamic: true })
-      )
+      .setAuthor({
+        name: client.user.tag,
+        iconURL: client.user.displayAvatarURL({ dynamic: true }),
+      })
       .addField(
         "Servers watching",
         `${client.guilds.cache.size.toLocaleString()} server${
@@ -34,7 +24,7 @@ module.exports = {
       )
       .addField("Users watching", client.users.cache.size.toString(), true)
       .addField("Commands", client.commands.size.toLocaleString(), true)
-      .addField("Prefix", `\`${message.prefix}\``, true)
+      .addField("Prefix", `\`${interaction.messagePrefix}\``, true)
       .addField(
         "Made with",
         `[discord.js](https://github.com/discordjs/discord.js)`,
@@ -47,9 +37,9 @@ module.exports = {
         true
       )
       .addField("Developer", "Not TCA#6651", true)
-      .setColor(message.color);
+      .setColor(interaction.color);
 
-    message.reply({
+    interaction.reply({
       embeds: [embed],
       components: [
         new MessageActionRow().addComponents(
@@ -62,6 +52,7 @@ module.exports = {
             .setEmoji("➕")
         ),
       ],
+      ephemeral: true,
     });
   },
-};
+});
