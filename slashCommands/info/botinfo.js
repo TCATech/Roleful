@@ -47,7 +47,7 @@ module.exports = new Command({
             .setStyle("LINK")
             .setLabel("Invite")
             .setURL(
-              "https://discord.com/oauth2/authorize?client_id=961077348550180870&scope=bot&permissions=18456"
+              "https://discord.com/oauth2/authorize?client_id=961077348550180870&scope=bot%20applications.commands&permissions=18456"
             )
             .setEmoji("➕")
         ),
